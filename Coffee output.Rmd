@@ -13,15 +13,21 @@ knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
 ```{r}
 library(tidyverse)
 arabica_data_cleaned <- read_csv("data/arabica_data_cleaned.csv")
+robusta_data_cleaned <- read_csv("data/robusta_data_cleaned.csv")
 ```
 
 ```{r}
 arabica_data_cleaned %>% filter(Sweetness>5) %>% 
 ggplot( ) + 
-  geom_point(mapping = aes(x = Total.Cup.Points, y = Sweetness))
+  geom_point(mapping = aes(x = Total.Cup.Points, y = Sweetness, colour = Processing.Method))
+
+arabica_data_cleaned %>% filter(Sweetness>5) %>% 
+ggplot( ) + 
+  geom_smooth(mapping = aes(x = Total.Cup.Points, y = Sweetness))
+
 ```
 
-This means sugar is good, okay
+Shows the correlations between sweetness and cup points where Sweetness is more than 5 and species is Arabica. 
 
  ```{r}
  #bad graph
@@ -41,3 +47,4 @@ qm %>% ggplot()+  geom_point(mapping = aes(x = Score, y = Rating )) +
 ```
 
 
+Shows the correlations between different measures and cup points where species is Arabica. 
