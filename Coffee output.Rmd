@@ -26,7 +26,7 @@ coffees <- bind_rows(arabica_data_cleaned, robusta_data_cleaned)
 ```{r}
 coffees %>% filter(Sweetness>5) %>% 
 ggplot( ) + 
-  geom_point(mapping = aes(x = Total.Cup.Points, y = Sweetness, colour = Processing.Method), 
+  geom_point(mapping = aes(x = Total.Cup.Points, y = Sweetness, colour = Species), 
              alpha = 0.5, 
              position = position_jitter(width = 0, height = 0.01))
 
