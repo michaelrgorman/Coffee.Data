@@ -12,6 +12,8 @@ knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
 
 ```{r}
 library(tidyverse)
+library(RColorBrewer)
+
 arabica_data_cleaned <- read_csv("data/arabica_data_cleaned.csv") %>%
   # keep only the numbers in the Harvest.Year column
   # need to check for leftover NA rows
