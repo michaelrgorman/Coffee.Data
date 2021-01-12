@@ -26,14 +26,10 @@ coffees <- bind_rows(arabica_data_cleaned, robusta_data_cleaned)
 ```{r}
 coffees %>% filter(Sweetness>5) %>% 
 ggplot( ) + 
+   geom_smooth(mapping = aes(x = Total.Cup.Points, y = Sweetness, colour = Species)) +
   geom_point(mapping = aes(x = Total.Cup.Points, y = Sweetness, colour = Species), 
              alpha = 0.5, 
              position = position_jitter(width = 0, height = 0.01))
-
-coffees %>% filter(Sweetness>5) %>% 
-ggplot( ) + 
-  geom_smooth(mapping = aes(x = Total.Cup.Points, y = Sweetness))
-
 ```
 
 Shows the correlations between sweetness and cup points where Sweetness is more than 5 and species is Arabica. 
@@ -45,15 +41,20 @@ Shows the correlations between sweetness and cup points where Sweetness is more 
 #   geom_point(mapping = aes(x = altitude_mean_meters, y = Sweetness))
  ```
 
-```{r}
-qm<-coffees %>% select(Aroma:Sweetness,Name, Rating = Total.Cup.Points) %>% 
+```{r} 
+qm<-coffees %>% select(Aroma:Sweetness,Name, Species, Processing.Method,  Rating = Total.Cup.Points) %>% 
   pivot_longer(cols=Aroma:Sweetness,names_to ="qlty",values_to="Score") %>% filter(Score>0)
-```
 
-```{r}
-qm %>% ggplot()+  geom_point(mapping = aes(x = Score, y = Rating )) +
-  facet_wrap(~qlty)
+qm %>% ggplot()+  geom_point(mapping = aes(x = Score, y = Rating, colour = Species ), alpha = 0.5) +
+  facet_wrap(~qlty) +
+  scale_color_brewer(palette = "Set3")
 ```
 
 
 Shows the correlations between different measures and cup points where species is Arabica. 
+
+```{r}
+ggplot(data=coffees %>% filter(Total.Cup.Points>5)) + geom_histogram(aes(x=Total.Cup.Points, fill = Species))
+
+```
+
