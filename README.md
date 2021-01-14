@@ -38,4 +38,7 @@ The site was scraped using a Selenium headless browser and Beautiful Soup. To re
 
 # Source
 
-These data were collected from the Coffee Quality Institute's [review pages](https://database.coffeeinstitute.org/) in January 2018. 
+These data were collected from the Coffee Quality Institute's [review pages](https://database.coffeeinstitute.org/) in January 2018.
+
+# More information:
+https://rpubs.com/harrison2245/697120
