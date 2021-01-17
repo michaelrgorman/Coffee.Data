@@ -28,7 +28,7 @@ coffees <- bind_rows(arabica_data_cleaned, robusta_data_cleaned)
 ```{r}
 coffees %>% filter(Sweetness>5) %>% 
 ggplot( ) + 
-   geom_smooth(mapping = aes(x = Total.Cup.Points, y = Sweetness, colour = Species)) +
+   geom_smooth(mapping = aes(x = Total.Cup.Points, y = Sweetness, colour = Species),method="lm") +
   geom_point(mapping = aes(x = Total.Cup.Points, y = Sweetness, colour = Species), 
              alpha = 0.5, 
              position = position_jitter(width = 0, height = 0.01))
@@ -59,4 +59,23 @@ Shows the correlations between different measures and cup points where species i
 ggplot(data=coffees %>% filter(Total.Cup.Points>5)) + geom_histogram(aes(x=Total.Cup.Points, fill = Species))
 
 ```
+
+```{r}
+ggplot(data=coffees %>% filter(Total.Cup.Points>5, !(is.na(Country.of.Origin)))) + geom_bar(aes(x= fct_rev(fct_infreq(Country.of.Origin ))))+coord_flip()+ xlab("Country") + 
+           ylab("Count")
+
+```
+
+
+```{r}
+ggplot(data=coffees %>% filter(Total.Cup.Points>5, !(is.na(Country.of.Origin)))) +
+  geom_bar(aes(x= fct_rev(fct_infreq(Country.of.Origin)),
+              fill = Species
+               )
+           )+
+  coord_flip() + xlab("Country") + 
+  ylab("Count")
+
+```
+
 
